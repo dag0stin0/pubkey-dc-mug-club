@@ -580,14 +580,29 @@ footer {
 /* ═══ SCARCITY COUNT-UP ═══ */
 (function () {
   var el = document.getElementById('sc-count');
+  var label = document.querySelector('.sc-label');
   if (!el) return;
   var counted = false;
+  var target = 100;
+
+  fetch('/api/zaprite')
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      if (typeof data.remaining === 'number') {
+        target = data.remaining;
+        if (label && data.sold > 0) {
+          label.textContent = 'spots left out of 100';
+        }
+        if (target === 0 && label) {
+          label.textContent = 'sold out';
+        }
+      }
+    })
+    .catch(function () { /* fallback to 100 */ });
 
   var obs = new IntersectionObserver(function (entries) {
     if (entries[0].isIntersecting && !counted) {
       counted = true;
-      var target = 100;
-      var current = 0;
       var duration = 1200;
       var start = performance.now();
 
@@ -595,8 +610,7 @@ footer {
         var elapsed = now - start;
         var progress = Math.min(elapsed / duration, 1);
         var eased = 1 - Math.pow(1 - progress, 3);
-        current = Math.round(eased * target);
-        el.textContent = current;
+        el.textContent = Math.round(eased * target);
         if (progress < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
