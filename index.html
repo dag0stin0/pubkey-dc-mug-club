@@ -58,12 +58,41 @@ body {
 .skip-link:focus { top: 1rem; }
 :focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 4px; }
 
+/* nav join button */
+.nav-join {
+  position: fixed; top: 1.25rem; right: 1.25rem; z-index: 200;
+  padding: .6rem 1.4rem;
+  font-family: 'JetBrains Mono', monospace; font-size: .7rem; font-weight: 600;
+  color: var(--bg); background: linear-gradient(135deg, var(--orange), var(--amber));
+  border: none; border-radius: var(--r-sm); text-decoration: none;
+  letter-spacing: .1em; text-transform: uppercase;
+  transition: transform .2s var(--ease-out-expo), box-shadow .2s var(--ease-out-expo), opacity .3s;
+  box-shadow: 0 2px 12px rgba(232, 93, 38, .3);
+  opacity: 0; pointer-events: none;
+}
+.nav-join.visible { opacity: 1; pointer-events: auto; }
+.nav-join:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(232, 93, 38, .4); }
+
+/* hero join button */
+.hero-join {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  padding: .6rem 1.4rem;
+  font-family: 'JetBrains Mono', monospace; font-size: .7rem; font-weight: 600;
+  color: var(--bg); background: linear-gradient(135deg, var(--orange), var(--amber));
+  border: none; border-radius: var(--r-sm); text-decoration: none;
+  letter-spacing: .1em; text-transform: uppercase;
+  transition: transform .2s var(--ease-out-expo), box-shadow .2s var(--ease-out-expo);
+  box-shadow: 0 2px 12px rgba(232, 93, 38, .3);
+  opacity: 0; animation: heroFadeIn .7s ease 1.6s forwards;
+}
+.hero-join:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(232, 93, 38, .4); }
+
 /* reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
   .s > * { opacity: 1 !important; transform: none !important; }
   .die { animation: none !important; }
-  .hero-label, .hero-title, .hero-dc, .hero-line, .hero-scroll { opacity: 1 !important; transform: none !important; }
+  .hero-label, .hero-title, .hero-dc, .hero-line, .hero-join, .hero-scroll { opacity: 1 !important; transform: none !important; }
   .hero-sub { opacity: .5 !important; transform: none !important; }
   .sc-num { opacity: 1 !important; }
 }
@@ -397,9 +426,11 @@ footer {
 <a href="#main" class="skip-link">Skip to content</a>
 <canvas id="ambient" aria-hidden="true"></canvas>
 <div class="progress" id="prog" role="presentation"></div>
+<a href="https://pay.zaprite.com/pl_GmXXcM7q48" class="nav-join" id="nav-join" target="_blank" rel="noopener">Join</a>
 
 <!-- ═══ HERO ═══ -->
 <header class="hero" role="banner">
+  <a href="https://pay.zaprite.com/pl_GmXXcM7q48" class="hero-join" target="_blank" rel="noopener">Join</a>
   <div class="hero-label">PubKey Washington, D.C.</div>
   <h1 class="hero-title">
     <span class="mug">MUG</span><span class="club">Club</span>
@@ -526,6 +557,17 @@ footer {
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
   for (var i = 0; i < sections.length; i++) obs.observe(sections[i]);
+})();
+
+/* ═══ NAV JOIN BUTTON ═══ */
+(function () {
+  var btn = document.getElementById('nav-join');
+  var hero = document.querySelector('.hero');
+  if (!btn || !hero) return;
+  var obs = new IntersectionObserver(function (entries) {
+    btn.classList.toggle('visible', !entries[0].isIntersecting);
+  }, { threshold: 0 });
+  obs.observe(hero);
 })();
 
 /* ═══ HERO SCROLL INDICATOR ═══ */
