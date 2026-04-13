@@ -420,10 +420,38 @@ footer {
 }
 
 /* ═══ RESPONSIVE ═══ */
+
+/* notch / safe area */
+@supports (padding: env(safe-area-inset-top)) {
+  .hero { padding-top: calc(2rem + env(safe-area-inset-top)); }
+  .nav-join { top: calc(1.25rem + env(safe-area-inset-top)); right: calc(1.25rem + env(safe-area-inset-right)); }
+  .hero-join { top: calc(1.25rem + env(safe-area-inset-top)); right: calc(1.25rem + env(safe-area-inset-right)); }
+  .fine-print { padding-bottom: calc(4rem + env(safe-area-inset-bottom)); }
+}
+
+/* tablet */
+@media (max-width: 768px) {
+  .hero-title { font-size: clamp(2.4rem, 10vw, 4rem); }
+  .cta-btn { padding: 1rem 2.5rem; }
+}
+
+/* mobile */
 @media (max-width: 600px) {
-  .hero-title { font-size: clamp(2.8rem, 14vw, 5rem); }
+  .hero-title { font-size: clamp(2rem, 12vw, 3.2rem); }
+  .hero-label { margin-bottom: 1.5rem; }
+  .hero-dc { margin-bottom: 1.5rem; }
   .dice-wrap { gap: 1rem; }
   .perk { padding: 1.5rem; }
+  .cta-btn { padding: .9rem 2rem; font-size: clamp(.6rem, 1.1vw, .7rem); }
+  .fine-print { font-size: .72rem; }
+}
+
+/* narrow phones */
+@media (max-width: 375px) {
+  .hero-title { font-size: clamp(1.8rem, 13vw, 2.8rem); }
+  .s { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .nav-join { padding: .5rem 1rem; font-size: .65rem; }
+  .hero-join { padding: .5rem 1rem; font-size: .65rem; }
 }
 </style>
 </head>
