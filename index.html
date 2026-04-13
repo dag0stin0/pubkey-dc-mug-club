@@ -116,6 +116,11 @@ body::after {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; padding: 2rem; position: relative; overflow: hidden;
 }
+.hero::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: url('beerflag-pixel.jpg') center/cover no-repeat;
+  opacity: .12;
+}
 .hero::before {
   content: ''; position: absolute; inset: 0;
   background:
