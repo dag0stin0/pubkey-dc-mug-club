@@ -515,7 +515,7 @@ footer {
 <!-- ═══ SCARCITY ═══ -->
 <section class="scarcity s" aria-label="Limited availability">
   <div class="sc-num" id="sc-count">100</div>
-  <div class="sc-label">spots. that's it.</div>
+  <div class="sc-label">SPOTS LEFT</div>
   <div class="sc-sub">Annual. Transferable. Yours.</div>
 </section>
 
@@ -591,10 +591,10 @@ footer {
       if (typeof data.remaining === 'number') {
         target = data.remaining;
         if (label && data.sold > 0) {
-          label.textContent = 'spots left out of 100';
+          label.textContent = 'SPOTS LEFT';
         }
         if (target === 0 && label) {
-          label.textContent = 'sold out';
+          label.textContent = 'SOLD OUT';
         }
       }
     })
