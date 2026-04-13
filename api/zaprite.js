@@ -1,5 +1,5 @@
 const PAYMENT_LINK_ID = 'pl_GmXXcM7q48';
-const TOTAL_SPOTS = 100;
+const TOTAL_SPOTS = 79;
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
