@@ -276,12 +276,20 @@ body::after {
 .perk-body strong { color: var(--tx); font-weight: 600; }
 
 /* ═══ DICE SECTION ═══ */
+.dice-scene-wrap {
+  position: relative; overflow: hidden;
+}
+.dice-scene-wrap .dice-video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: .15; z-index: 0; pointer-events: none;
+}
+.dice-scene-wrap .s { position: relative; z-index: 1; }
 .dice-scene {
   text-align: center; position: relative; overflow: hidden;
   padding-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 .dice-scene::before {
-  content: ''; position: absolute; inset: 0;
+  content: ''; position: absolute; inset: 0; z-index: 0;
   background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(232, 93, 38, .06) 0%, transparent 60%);
 }
 .dice-wrap {
@@ -519,14 +527,18 @@ footer {
 <div class="div-line"></div>
 
 <!-- ═══ JUST THE TIP — DICE ═══ -->
-<section class="s" id="dice" aria-label="Just the Tip dice game">
-  <div class="snum">02</div>
-  <h2 class="sec-h">Just the <em>Tip</em></h2>
-  <p class="sub">Our house dice game. Roll two d6s once per day when you close your check &mdash; one die is your tens, the other is your ones.</p>
-</section>
+<div class="dice-scene-wrap">
+  <video class="dice-video" autoplay muted loop playsinline aria-hidden="true">
+    <source src="dice-bg.mp4" type="video/mp4">
+  </video>
+  <section class="s" id="dice" aria-label="Just the Tip dice game">
+    <div class="snum">02</div>
+    <h2 class="sec-h">Just the <em>Tip</em></h2>
+    <p class="sub">Our house dice game. Roll two d6s once per day when you close your check &mdash; one die is your tens, the other is your ones.</p>
+  </section>
 
-<div class="dice-scene s" aria-label="Interactive dice demo">
-  <div class="dice-wrap">
+  <div class="dice-scene s" aria-label="Interactive dice demo">
+    <div class="dice-wrap">
     <div class="die" id="die1" role="button" tabindex="0" aria-label="Roll first die">?</div>
     <div class="die" id="die2" role="button" tabindex="0" aria-label="Roll second die">?</div>
   </div>
@@ -540,6 +552,7 @@ footer {
     <p class="dice-explain-note">
       You still tip your server on the full amount, because you're not an animal.
     </p>
+    </div>
   </div>
 </div>
 
